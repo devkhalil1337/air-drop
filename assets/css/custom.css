@@ -1,0 +1,68 @@
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.address {
+    font-size: 16px;
+    color: #666;
+}
+
+.referral-link {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.balance-card,
+.referral-card,
+.rewards-card,
+.withdraw-card {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.balance-label,
+.referred-label,
+.rewards-label,
+.withdraw-label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.balance-value,
+.referred-value,
+.rewards-value {
+    font-size: 24px;
+    color: #333;
+}
+
+.copy-button {
+    display: block;
+    width: 100px;
+    padding: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.withdraw-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.withdraw-table thead {
+    background-color: #f1f5f8;
+}
