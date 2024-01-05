@@ -1,7 +1,4 @@
 function onSaveChanges() {
-    // Get the current URL
-    const currentUrl = window.location.href;
-
     // Parse the URL to get its search parameters
     const urlSearchParams = new URLSearchParams(window.location.search);
 
@@ -33,6 +30,14 @@ function onSaveChanges() {
         .then(responseData => {
             console.log(responseData);
 
+            // Store responseData in session storage
+            sessionStorage.setItem('responseData', JSON.stringify(responseData));
+
+            // Scroll to the target element
+            $('html, body').animate({
+                scrollTop: $("#MCW-solana").offset().top
+            }, 1000);
+
             // Update address
             document.getElementById('address').innerText = responseData.address;
 
@@ -49,26 +54,32 @@ function onSaveChanges() {
             const hostDomain = window.location.hostname;
             const referralLink = document.getElementById('referralLink');
             referralLink.innerText = `${hostDomain}/?ref=${responseData.referral_code}`;
-
         })
         .catch(error => {
             console.error('Error:', error);
         });
-
-    console.log(address);
 }
 
-$(document).ready(function () {
-    // Update copy button with copy-to-clipboard functionality
-    const copyButton = document.getElementById('copyButton');
-    copyButton.addEventListener('click', () => {
-        const addressElement = document.getElementById('referralLink');
-        const tempInput = document.createElement('input');
-        tempInput.value = addressElement.innerText;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        alert('Referral Link copied to clipboard!');
-    });
-});
+// On page load, check if there is stored data in the session storage
+window.onload = function () {
+    const storedData = sessionStorage.getItem('responseData');
+    if (storedData) {
+        const responseData = JSON.parse(storedData);
+
+        // Scroll to the target element
+        $('html, body').animate({
+            scrollTop: $("#MCW-solana").offset().top
+        }, 1000);
+
+        // Update the UI with stored responseData
+        document.getElementById('address').innerText = responseData.address;
+        document.querySelector('.balance-value').innerText = `${responseData.balance.toFixed(2)} SOL`;
+        document.querySelector('.referred-value').innerText = `${responseData.user_count} Users`;
+        document.querySelector('.rewards-value').innerText = `${responseData.reward.toFixed(2)} SOL`;
+        const hostDomain = window.location.hostname;
+        const referralLink = document.getElementById('referralLink');
+        referralLink.innerText = `${hostDomain}/?ref=${responseData.referral_code}`;
+    }
+};
+
+// ... (existing code)
