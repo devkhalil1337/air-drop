@@ -60,26 +60,21 @@ function onSaveChanges() {
         });
 }
 
-// On page load, check if there is stored data in the session storage
-window.onload = function () {
-    const storedData = sessionStorage.getItem('responseData');
-    if (storedData) {
-        const responseData = JSON.parse(storedData);
+const storedData = sessionStorage.getItem('responseData');
+if (storedData) {
+    const responseData = JSON.parse(storedData);
 
-        // Scroll to the target element
-        $('html, body').animate({
-            scrollTop: $("#MCW-solana").offset().top
-        }, 1000);
+    // Scroll to the target element
+    $('html, body').animate({
+        scrollTop: $("#MCW-solana").offset().top
+    }, 1000);
 
-        // Update the UI with stored responseData
-        document.getElementById('address').innerText = responseData.address;
-        document.querySelector('.balance-value').innerText = `${responseData.balance.toFixed(2)} SOL`;
-        document.querySelector('.referred-value').innerText = `${responseData.user_count} Users`;
-        document.querySelector('.rewards-value').innerText = `${responseData.reward.toFixed(2)} SOL`;
-        const hostDomain = window.location.hostname;
-        const referralLink = document.getElementById('referralLink');
-        referralLink.innerText = `${hostDomain}/?ref=${responseData.referral_code}`;
-    }
-};
-
-// ... (existing code)
+    // Update the UI with stored responseData
+    document.getElementById('address').innerText = responseData.address;
+    document.querySelector('.balance-value').innerText = `${responseData.balance.toFixed(2)} SOL`;
+    document.querySelector('.referred-value').innerText = `${responseData.user_count} Users`;
+    document.querySelector('.rewards-value').innerText = `${responseData.reward.toFixed(2)} SOL`;
+    const hostDomain = window.location.hostname;
+    const referralLink = document.getElementById('referralLink');
+    referralLink.innerText = `${hostDomain}/?ref=${responseData.referral_code}`;
+}
