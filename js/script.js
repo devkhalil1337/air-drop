@@ -14,7 +14,7 @@ function onSaveChanges() {
         return;
     }
 
-    fetch("http://localhost:3000/save", {
+    fetch("/save", {
         method: "POST", // Use POST method to send data
         headers: {
             "Content-Type": "application/json"
